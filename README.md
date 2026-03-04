@@ -1,73 +1,52 @@
-# React + TypeScript + Vite
+# Fat Elephant - Official Band Hub 🐘🎸
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-time, interactive web application built for the band **Fat Elephant**. This project serves as a dynamic promotional website showcasing the band's aesthetic, while doubling as a powerful, collaborative internal hub for band members to coordinate schedules, plan setlists, and brainstorm social media content.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interactive 3D Hero:** A striking landing page featuring a custom 3D elephant model and dynamic curved typography utilizing WebGL.
+- **Real-Time Collaborative Setlist:** A drag-and-drop interactive setlist where any band member can add, edit, or reorder songs, syncing instantly across everyone's devices.
+- **Shared Schedule & Notice Board:** An organized calendar for rehearsals and gigs, plus an auto-saving notice board for dropping links and messages to the team.
+- **Social Content Sketchpad:** A dedicated space to draft, edit, and store video ideas and social media strategies.
+- **Music & Media Hub:** Quick links to the band's Spotify, Apple Music, and Instagram to drive fan engagement, alongside an album showcase.
 
-## React Compiler
+## 🛠️ Technology Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend:** React 19 (via Vite), TypeScript
+- **Styling:** Tailwind CSS (v4)
+- **3D Graphics:** Three.js, React Three Fiber, React Three Drei
+- **Animations:** Framer Motion
+- **Database / Backend:** Firebase Firestore (Real-time NoSQL Database)
+- **Icons:** Lucide React
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started (Local Development)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+To run this project on your local machine:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Clone & Install
+```bash
+git clone https://github.com/your-username/fat-elephant.git
+cd fat-elephant
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Firebase Setup
+Since this app uses Firebase for real-time collaboration, you need to provide your own database credentials if you are forking this project.
+1. Create a project at [Firebase](https://console.firebase.google.com/).
+2. Enable **Firestore Database** in test mode.
+3. Replace the config in `src/firebase.ts` with your project's keys.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 3. Run the Development Server
+```bash
+npm run dev
 ```
+Open [http://localhost:5173](http://localhost:5173) in your browser to view the app.
+
+## 🌍 Deployment
+
+This project is fully optimized and ready to be deployed to platforms like [Vercel](https://vercel.com/) or [Netlify](https://netlify.com/).
+
+To deploy on Vercel:
+1. Push your code to your GitHub repository.
+2. Link the repository to a new Vercel project.
+3. Vercel will automatically detect the Vite build settings and deploy the live site.

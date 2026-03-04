@@ -16,7 +16,7 @@ export const TransitionSection = () => {
                 <br></br>
                 <h2 className="text-2xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-[#f5f5f7] flex flex-col items-center">
                     <span>
-                        The Band Ur <span style={{ color: '#ff66c4' }}>girl</span> told <span style={{ color: '#33ccff' }}>U</span>
+                        The Band Ur <span style={{ color: '#bd7b7b' }}>girl</span> told <span style={{ color: '#7ba8bd' }}>U</span>
                     </span>
                     <span className="self-start -ml-4 md:-ml-8 lg:-ml-12 mt-2">
                         not to worry about

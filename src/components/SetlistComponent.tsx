@@ -28,7 +28,7 @@ export const SetlistComponent = () => {
     }, []);
 
     const saveSongs = async (newSongs: Song[]) => {
-        setSongs(newSongs); // Optimistic UI update
+        setSongs(newSongs); 
         await setDoc(doc(db, 'setlist', 'main'), { songs: newSongs });
     };
 

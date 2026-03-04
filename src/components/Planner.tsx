@@ -160,10 +160,10 @@ export const Planner = () => {
                     ))}
                 </div>
 
-                {/* Team Messages Section */}
+
                 <div className="mt-12 p-6 rounded-2xl border border-white/5 bg-[#0a0a0a] shadow-lg">
                     <div className="flex items-center justify-between mb-4">
-                        <h4 className="text-lg font-medium text-white/90">Band Notice Board</h4>
+                        <h4 className="text-lg font-medium text-white/90">Notice Board</h4>
                         <span className="text-xs text-white/40">Auto-saved</span>
                     </div>
                     <textarea
@@ -175,7 +175,7 @@ export const Planner = () => {
                 </div>
             </div>
 
-            {/* Event Input Modal/Overlay */}
+
             {selectedDateIndex !== null && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
                     <div className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 max-w-md w-full relative shadow-2xl">
@@ -193,7 +193,7 @@ export const Planner = () => {
                         <h4 className="text-2xl font-semibold text-white mb-1">Manage Events</h4>
                         <p className="text-[#33ccff] font-medium text-sm mb-8 tracking-wide">{days[selectedDateIndex].displayDate}</p>
 
-                        {/* Existing Events List */}
+
                         <div className="mb-8 space-y-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
                             {days[selectedDateIndex].events.length === 0 ? (
                                 <p className="text-white/30 text-sm italic py-4 text-center border border-white/5 border-dashed rounded-xl">No events scheduled.</p>

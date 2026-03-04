@@ -12,7 +12,7 @@ export const ContentHub = () => {
                     </h3>
                     <div className="flex flex-col gap-3">
                         {[
-                        { name: 'Spotify', url: '#' },
+                        { name: 'Spotify', url: 'https://open.spotify.com/artist/7o2yKOsqKliQMe6uVLXHHJ' },
                         { name: 'Apple Music', url: 'https://music.apple.com/il/artist/fat-elephant/1605170615' },
                         { name: 'Instagram', url: 'https://www.instagram.com/fatellephant?igsh=MTdpa3lhd2FqcTIwMw==' }
                     

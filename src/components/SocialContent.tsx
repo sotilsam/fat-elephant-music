@@ -15,8 +15,6 @@ export const SocialContent = () => {
     const [posts, setPosts] = useState<SocialPost[]>([]);
     const [newTitle, setNewTitle] = useState('');
     const [newNotes, setNewNotes] = useState('');
-
-    // Editing state
     const [editingId, setEditingId] = useState<string | null>(null);
     const [editTitle, setEditTitle] = useState('');
     const [editNotes, setEditNotes] = useState('');
