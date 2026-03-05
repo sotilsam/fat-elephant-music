@@ -88,9 +88,7 @@ export const SocialContent = () => {
             <div className="max-w-6xl mx-auto px-6">
 
                 <div className="mb-12 flex items-center gap-4">
-                    <div className="p-3 bg-[#ff66c4]/20 rounded-xl text-[#ff66c4] shadow-[0_0_15px_rgba(255,102,196,0.3)]">
-                        <Video size={24} />
-                    </div>
+  
                     <h2 className="text-3xl font-semibold text-white tracking-tight">Social Content Ideas</h2>
                 </div>
 
