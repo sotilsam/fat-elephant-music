@@ -1,6 +1,6 @@
-import { useRef, Suspense } from 'react';
+import { useRef, Suspense, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useScroll, ScrollControls, useGLTF, Text3D, Center } from '@react-three/drei';
+import { useScroll, ScrollControls, useGLTF, Scroll } from '@react-three/drei';
 import * as THREE from 'three';
 
 const ElephantModel = () => {
@@ -32,66 +32,31 @@ const ElephantModel = () => {
 
 useGLTF.preload('/elephant.glb');
 
-const FatElephantText = () => {
+const AnimatedHeadline = () => {
     const scroll = useScroll();
-    const materialRefs = useRef<(THREE.MeshStandardMaterial | null)[]>([]);
-    const { size } = useThree();
+    const [opacity, setOpacity] = useState(0);
 
-    const isMobile = size.width < 768;
-
-    useFrame((_, delta) => {
-        const targetOpacity = scroll.offset >= 0.85 ? 1 : 0;
-        materialRefs.current.forEach((mat) => {
-            if (mat) {
-                mat.opacity = THREE.MathUtils.lerp(mat.opacity, targetOpacity, 15 * delta);
-            }
-        });
+    useFrame(() => {
+        // perfectly synced with the 3D elephant rotation!
+        if (scroll.offset >= 0.85) {
+            const newOpacity = Math.min((scroll.offset - 0.85) / 0.15, 1);
+            setOpacity(newOpacity);
+        } else {
+            setOpacity(0);
+        }
     });
 
-    const text = "FAT ELEPHANT";
-    const radius = isMobile ? 1.7 : 3.2; // How wide the circle is
-    const maxAngle = Math.PI / 4.5; // How far the text spreads around the top of the circle
-
     return (
-        <group position={[0, isMobile ? 0.3 : -0.2, 0]}>
-            {text.split('').map((char, index) => {
-                // Determine angle for this specific letter
-                const t = index / (text.length - 1);
-                const angle = -maxAngle + t * maxAngle * 2; // Arcs from -maxAngle (left) to +maxAngle (right)
-
-                // Position on the edge of the circle (top half)
-                const x = Math.sin(angle) * radius;
-                const y = Math.cos(angle) * radius;
-
-                return (
-                    <group key={index} position={[x, y, 0]} rotation={[0, 0, -angle]}>
-                        <Center>
-                            <Text3D
-                                font="/font.json"
-                                size={isMobile ? 0.2 : 0.35}
-                                height={isMobile ? 0.08 : 0.15}
-                                curveSegments={32}
-                                bevelEnabled
-                                bevelThickness={isMobile ? 0.04 : 0.06}
-                                bevelSize={isMobile ? 0.02 : 0.04}
-                                bevelOffset={0}
-                                bevelSegments={12}
-                            >
-                                {char}
-                                <meshStandardMaterial
-                                    ref={(el) => (materialRefs.current[index] = el)}
-                                    color="#ffffff"
-                                    transparent
-                                    opacity={0}
-                                    roughness={0.3}
-                                    metalness={0.7}
-                                />
-                            </Text3D>
-                        </Center>
-                    </group>
-                );
-            })}
-        </group>
+        <Scroll html>
+            <div
+                className="absolute inset-0 z-10 w-screen h-screen flex flex-col items-center pt-28 md:pt-20 pointer-events-none transition-opacity duration-75"
+                style={{ opacity, transform: 'translate3d(0, 0, 0)' }} // Translate3d helps prevent rendering bugs in <Scroll html>
+            >
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-gray-500 via-white to-gray-500 bg-clip-text text-transparent tracking-widest md:tracking-[0.1em] uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+                    Fat Elephant
+                </h1>
+            </div>
+        </Scroll>
     );
 };
 
@@ -99,13 +64,14 @@ export const HeroSection = () => {
     return (
         <div className="w-full h-[150vh] bg-black relative">
             <div className="sticky top-0 w-full h-screen">
+                {/* 3D Canvas */}
                 <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
                     <ambientLight intensity={0.5} />
                     <directionalLight position={[10, 10, 10]} intensity={1} />
                     <Suspense fallback={null}>
                         <ScrollControls pages={1.5} damping={0.1}>
                             <ElephantModel />
-                            <FatElephantText />
+                            <AnimatedHeadline />
                         </ScrollControls>
                     </Suspense>
                 </Canvas>
