@@ -11,25 +11,25 @@ const ElephantModel = ({ scrollProgress }: { scrollProgress: number }) => {
     // Check if device is a phone
     const isMobile = size.width < 768;
 
-    // useFrame(() => {
-    //     if (groupRef.current) {
-    //         // Target rotation is directly tied to scroll progress (0 to 1 -> 0 to PI)
-    //         const targetRotation = scrollProgress * Math.PI;
-    //         // Lerp to make it smooth
-    //         groupRef.current.rotation.y = THREE.MathUtils.lerp(
-    //             groupRef.current.rotation.y,
-    //             targetRotation,
-    //             0.1 // Damping factor for smoothness
-    //         );
-    //     }
-    // });
+    useFrame(() => {
+        if (groupRef.current) {
+            // Target rotation is directly tied to scroll progress (0 to 1 -> 0 to PI)
+            const targetRotation = scrollProgress * Math.PI;
+            // Lerp to make it smooth
+            groupRef.current.rotation.y = THREE.MathUtils.lerp(
+                groupRef.current.rotation.y,
+                targetRotation,
+                0.1 // Damping factor for smoothness
+            );
+        }
+    });
 
     return (
-        <group ref={groupRef} rotation={[0, Math.PI, 0]}>
+        <group ref={groupRef}>
             <primitive
                 object={scene}
-                scale={isMobile ? [2.5, 2.5, 2.5] : [4, 4, 4]}
-                position={[0, 0, 0]}
+                scale={isMobile ? [3, 3, 3] : [5, 5, 5]}
+                position={[0, isMobile ? -0.8 : 0, 0]}
             />
         </group>
     );
@@ -58,8 +58,8 @@ export const HeroSection = () => {
     }, []);
 
     return (
-        <div className="w-full h-screen bg-black relative">
-            <div className="w-full h-screen overflow-hidden">
+        <div className="w-full h-[400vh] bg-black relative">
+            <div className="sticky top-0 w-full h-screen overflow-hidden">
                 <Canvas
                     camera={{ position: [0, 2, 8], fov: 50 }}
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1, pointerEvents: 'none' }}
