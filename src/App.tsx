@@ -4,8 +4,6 @@ import { AlbumSection } from './components/AlbumSection';
 import { MusicPlayer } from './components/MusicPlayer';
 import { Planner } from './components/Planner';
 import { ContentHub } from './components/ContentHub';
-import { SetlistComponent } from './components/SetlistComponent';
-import { SocialContent } from './components/SocialContent';
 
 function App() {
   return (
@@ -15,8 +13,6 @@ function App() {
       <AlbumSection />
       <MusicPlayer />
       <Planner />
-      <SetlistComponent />
-      <SocialContent />
       <ContentHub />
 
       <footer className="w-full py-12 text-center bg-black text-[#86868b] text-sm">

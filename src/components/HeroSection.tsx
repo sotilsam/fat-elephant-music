@@ -2,10 +2,16 @@ import { useRef, Suspense, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
+import type { GLTF } from 'three-stdlib';
+
+type GLTFResult = GLTF & {
+    nodes: unknown;
+    materials: unknown;
+};
 
 const ElephantModel = ({ scrollProgress }: { scrollProgress: number }) => {
     const groupRef = useRef<THREE.Group>(null);
-    const { scene } = useGLTF('/elephant.glb') as any;
+    const { scene } = useGLTF('/elephant.glb') as GLTFResult;
     const { size } = useThree();
 
     // Check if device is a phone
@@ -29,7 +35,7 @@ const ElephantModel = ({ scrollProgress }: { scrollProgress: number }) => {
             <primitive
                 object={scene}
                 scale={isMobile ? [3, 3, 3] : [5, 5, 5]}
-                position={[0, isMobile ? -0.8 : 0, 0]}
+                position={[0, 0, 0]}
             />
         </group>
     );
@@ -42,7 +48,8 @@ export const HeroSection = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            const rotationScrollDistance = window.innerHeight * 2.5;
+            const isMobile = window.innerWidth < 768;
+            const rotationScrollDistance = isMobile ? window.innerHeight * 1.5 : window.innerHeight * 2.5;
             // Calculate progress from 0 to 1 based on how far we've scrolled
             let progress = window.scrollY / rotationScrollDistance;
             // Clamp it between 0 and 1 so it stops rotating exactly at 180 degrees
@@ -58,10 +65,10 @@ export const HeroSection = () => {
     }, []);
 
     return (
-        <div className="w-full h-[400vh] bg-black relative">
+        <div className="w-full h-[250vh] md:h-[400vh] bg-black relative">
             <div className="sticky top-0 w-full h-screen overflow-hidden">
                 <Canvas
-                    camera={{ position: [0, 2, 8], fov: 50 }}
+                    camera={{ position: [0, 2, 8], fov: 60 }}
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1, pointerEvents: 'none' }}
                 >
                     <ambientLight intensity={0.5} />
